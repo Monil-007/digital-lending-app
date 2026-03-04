@@ -15,5 +15,23 @@ public class LoanContext {
     private EmploymentType employmentType;
     private int creditScore;
     private RiskBand riskBand;
+    private BigDecimal emi;
+
+    public LoanContext(BigDecimal amount,
+                       int tenureMonths,
+                       int age,
+                       BigDecimal monthlyIncome,
+                       EmploymentType employmentType,
+                       int creditScore,
+                       RiskBand riskBand) {
+
+        this.amount = amount;
+        this.tenureMonths = tenureMonths;
+        this.age = age;
+        this.monthlyIncome = monthlyIncome;
+        this.employmentType = employmentType;
+        this.creditScore = creditScore;
+        this.riskBand = riskBand;
+    }
 
 }
