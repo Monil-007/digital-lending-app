@@ -6,7 +6,8 @@ public class BusinessException extends RuntimeException {
 
     private final List<String> reasons;
 
-    public BusinessException(List<String> reasons) {
+    public BusinessException(String message, List<String> reasons) {
+        super(message);
         this.reasons = reasons;
     }
 

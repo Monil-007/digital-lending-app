@@ -7,17 +7,17 @@ import lombok.Data;
 @Data
 public class LoanRequest {
 
-    @NotNull
-    @Min(10000)
-    @Max(5000000)
+    @NotNull(message = "Loan amount is required")
+    @Min(value = 10000, message = "Minimum loan amount is 10,000")
+    @Max(value = 5000000, message = "Maximum loan amount is 50,00,000")
     private Double amount;
 
-    @NotNull
-    @Min(6)
-    @Max(360)
+    @NotNull(message = "Tenure is required")
+    @Min(value = 6, message = "Minimum tenure is 6 months")
+    @Max(value = 360, message = "Maximum tenure is 360 months")
     private Integer tenureMonths;
 
-    @NotNull
+    @NotNull(message = "Loan purpose must be specified")
     private LoanPurpose purpose;
 
 }

@@ -1,8 +1,11 @@
 package com.example.digitalLendingApp.domain.template;
 
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+@Component
 public class StandardEmiCalculator extends AbstractEmiCalculator {
 
     @Override

@@ -95,7 +95,6 @@ class InMemoryLoanApplicationRepositoryTest {
         offer.setTenureMonths(36);
         offer.setEmi(BigDecimal.valueOf(16666.67));
         offer.setTotalPayable(BigDecimal.valueOf(600000.00));
-        
         response.setOffer(offer);
         return response;
     }

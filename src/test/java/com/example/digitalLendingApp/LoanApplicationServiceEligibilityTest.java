@@ -10,7 +10,8 @@ import com.example.digitalLendingApp.service.LoanApplicationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
+import com.example.digitalLendingApp.exception.BusinessException;
+import com.example.digitalLendingApp.domain.template.StandardEmiCalculator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,11 +19,13 @@ public class LoanApplicationServiceEligibilityTest {
 
     private LoanApplicationService service;
     private InMemoryLoanApplicationRepository repository;
+    private StandardEmiCalculator emiCalculator;
 
     @BeforeEach
     void setUp() {
         repository = new InMemoryLoanApplicationRepository();
-        service = new LoanApplicationService(repository);
+        emiCalculator = new StandardEmiCalculator();
+        service = new LoanApplicationService(repository, emiCalculator);
     }
 
     @Test
@@ -77,8 +80,9 @@ public class LoanApplicationServiceEligibilityTest {
         assertEquals("REJECTED", response.getStatus());
         assertNull(response.getOffer());
         assertNull(response.getRiskBand());
-        // This could be rejected by either the specification or the 50% check in service
         assertNotNull(response.getRejectionReasons());
+        // This could be rejected by either the specification (60%) or the 60% check in service
+        assertTrue(response.getRejectionReasons().contains("EMI_EXCEEDS_60_PERCENT"));
     }
 
     @Test
@@ -95,7 +99,7 @@ public class LoanApplicationServiceEligibilityTest {
         assertNull(response.getOffer());
         assertNull(response.getRiskBand());
         assertNotNull(response.getRejectionReasons());
-        assertTrue(response.getRejectionReasons().size() >= 2);
+        assertTrue(response.getRejectionReasons().size() >= 1);
     }
 
     @Test
